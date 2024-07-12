@@ -1,0 +1,84 @@
+.grid {
+  padding: 20px;
+  color: white;
+}
+
+.grid_heading {
+  display: flex;
+  justify-content: space-between;
+  padding: auto;
+  padding-right: 1rem;
+  align-items: center;
+}
+
+.row_posters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.posters {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  padding: 5px;
+  margin: 5px 0;
+  color: #b9b9b9;
+  background-color: #1f1f1f;
+  border-radius: 10px;
+  position: relative;
+  font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
+}
+
+.posters .title {
+  width: 100%;
+  text-align: center;
+  font-size: 17px;
+  padding: 8px 0;
+}
+
+.posters .subTitle {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 3px;
+  padding: 0 2px;
+  padding-bottom: 3px;
+}
+
+.posters:hover {
+  background-color: white;
+  color: black;
+}
+
+.row_posters::-webkit-scrollbar {
+  display: none;
+}
+
+.row_poster {
+  border-radius: 10px;
+}
+
+.row_posterLarge {
+  max-height: 250px;
+}
+
+/* .row_posters .poster {
+  flex: 1 1 calc(33.33% - 2rem);
+  box-sizing: border-box;
+} */
+
+@media (max-width: 550px) {
+  .row_posters .posters {
+    width: 46%;
+  }
+}
+
+/* 
+@media (max-width: 600px) {
+  .posters {
+    flex: 1 1 calc(50% - 2rem);
+  }
+} */

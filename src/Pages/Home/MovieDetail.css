@@ -1,0 +1,81 @@
+.movie-detail-container {
+  padding: 20px;
+}
+
+.details_content {
+  display: flex;
+  flex-direction: row;
+}
+
+.details_content img {
+  object-fit: contain;
+  border-radius: 20px;
+  width: 500px;
+}
+.movie-title {
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.movie-poster {
+  margin: 4rem auto;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movie-overview {
+  margin: 20px 0;
+  text-align: justify;
+}
+
+.trailer-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.trailer-video {
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+}
+
+.actors-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.actor-card {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  padding: 5px;
+  margin: 5px 0;
+  color: #b9b9b9;
+  background-color: #1f1f1f;
+  border-radius: 10px;
+  position: relative;
+  font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
+}
+
+/* .actor-image {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ddd;
+} */
+
+.row_poster {
+  border-radius: 10px;
+}
+
+.row_posterLarge {
+  max-height: 250px;
+}
+.actor-name {
+  padding: 10px;
+  font-size: 16px;
+}
