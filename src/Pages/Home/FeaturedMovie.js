@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Badge } from "@material-ui/core";
 import "./Featured.css";
 import axios from "../../axios";
 import { Link } from "react-router-dom";
+import { img_300, unavailable } from "../../config/config";
 
 const FeaturedMovie = ({ fetchUrl, isLargeRow }) => {
   const [movie, setMovie] = useState([]);
@@ -25,24 +27,30 @@ const FeaturedMovie = ({ fetchUrl, isLargeRow }) => {
         <Link to="/trending">See more</Link>
       </div>
 
-      <div className="row_posters">
+      <div className="featured_movie">
         {movie.map((movies) => (
-          <div className="posters" key={movies.id}>
-            <Link to={`/movie/${movies.id}`}>
+          <div className="movies" key={movies.id}>
+            <Badge
+              badgeContent={movies.vote_average}
+              color={movies.vote_average > 6 ? "primary" : "secondary"}
+            />
+            <Link to={`/movie/${movies.id}`} className="img_link">
               <img
-                className={`row_poster ${isLargeRow && "row_posterLarge"}`}
-                src={`${base_url}${
-                  isLargeRow ? movies.poster_path : movies.backdrop_path
-                }`}
+                className="images"
+                src={
+                  movies.poster_path
+                    ? `${img_300}/${movies.poster_path}`
+                    : unavailable
+                }
                 alt={movies.name}
               />
             </Link>
             <b className="title">{movies.title || movies.name}</b>
             <span className="subTitle">
-              {movies.media_type}
-              <span className="subTitle">
-                {movies.release_date || movies.first_air_date}
-              </span>
+              {movies.media_type === "tv" ? "TV Series" : "Movie"}
+            </span>
+            <span className="subTitle">
+              {movies.release_date || movies.first_air_date}
             </span>
           </div>
         ))}

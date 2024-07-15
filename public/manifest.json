@@ -1,6 +1,6 @@
 {
-  "name": "Entertainment Hub",
-  "short_name": "Entertainment Hub",
+  "name": "Movie Insight",
+  "short_name": "Movie Insight",
   "theme_color": "#000000",
   "background_color": "#000000",
   "display": "standalone",
@@ -13,7 +13,7 @@
       "type": "image/x-icon"
     },
     {
-      "src": "maskable.png",
+      "src": "favicon.ico",
       "sizes": "196x196",
       "type": "image/png",
       "purpose": "any maskable"
