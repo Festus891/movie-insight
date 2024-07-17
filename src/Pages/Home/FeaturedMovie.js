@@ -34,7 +34,7 @@ const FeaturedMovie = ({ fetchUrl, isLargeRow }) => {
     <div className="grid">
       <div className="grid_heading">
         <h1>Featured Movie</h1>
-        <Link to="/latest">See more</Link>
+        <Link to="/trending">See more</Link>
       </div>
 
       <div className="featured_movie">

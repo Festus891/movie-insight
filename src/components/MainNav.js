@@ -32,7 +32,9 @@ export default function SimpleBottomNavigation() {
     } else if (value === 2) {
       history.push("/movies");
     } else if (value === 3) {
-      history.push("/latest");
+      history.push("/trending");
+    } else if (value === 4) {
+      history.push("/search");
     }
   }, [value, history]);
 
@@ -62,8 +64,13 @@ export default function SimpleBottomNavigation() {
       />
       <BottomNavigationAction
         style={{ color: "white" }}
-        label="Latest"
+        label="Trending"
         icon={<MovieIcon />}
+      />
+      <BottomNavigationAction
+        style={{ color: "white" }}
+        label="Search"
+        icon={<SearchIcon />}
       />
     </BottomNavigation>
   );
