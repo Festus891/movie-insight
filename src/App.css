@@ -13,6 +13,10 @@ body {
   padding-bottom: 70px;
 }
 
+.container {
+  width: 100%;
+}
+
 @media (max-width: 700px) {
   .app {
     /* padding-top: 30px; */

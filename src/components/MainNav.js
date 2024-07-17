@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     width: "100%",
     position: "fixed",
     bottom: 0,
-    backgroundColor: "#1f1f1f",
+    backgroundColor: "black",
     zIndex: 100,
   },
 });
@@ -28,13 +28,11 @@ export default function SimpleBottomNavigation() {
     if (value === 0) {
       history.push("/");
     } else if (value === 1) {
-      history.push("/trending");
+      history.push("/series");
     } else if (value === 2) {
       history.push("/movies");
     } else if (value === 3) {
-      history.push("/series");
-    } else if (value === 4) {
-      history.push("/search");
+      history.push("/latest");
     }
   }, [value, history]);
 
@@ -54,23 +52,18 @@ export default function SimpleBottomNavigation() {
       />
       <BottomNavigationAction
         style={{ color: "white" }}
-        label="Trending"
-        icon={<WhatshotIcon />}
-      />
-      <BottomNavigationAction
-        style={{ color: "white" }}
-        label="Movies"
-        icon={<MovieIcon />}
-      />
-      <BottomNavigationAction
-        style={{ color: "white" }}
-        label="TV Series"
+        label="TV Show"
         icon={<TvIcon />}
       />
       <BottomNavigationAction
         style={{ color: "white" }}
-        label="Search"
-        icon={<SearchIcon />}
+        label="Movies"
+        icon={<WhatshotIcon />}
+      />
+      <BottomNavigationAction
+        style={{ color: "white" }}
+        label="Latest"
+        icon={<MovieIcon />}
       />
     </BottomNavigation>
   );

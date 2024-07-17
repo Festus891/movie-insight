@@ -31,7 +31,14 @@
 }
 
 .logo img {
-  width: 4rem;
+  width: 3rem;
+  object-fit: contain;
+}
+
+.logo h2 {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 600;
+  color: red;
 }
 
 .footer {

@@ -55,9 +55,9 @@ const MovieDetail = ({ isLargeRow }) => {
         }
         alt={actor?.name}
         onDragStart={handleDragStart}
-        className="carouselItem__img"
+        className="carouselItem-img"
       />
-      <b className="carouselItem__txt">{actor?.name}</b>
+      <b className="carouselItem-txt">{actor?.name}</b>
     </div>
   ));
 
@@ -82,73 +82,66 @@ const MovieDetail = ({ isLargeRow }) => {
   }
 
   return (
-    <div className="modal">
-      <div className="paper">
-        <div className="contentModal">
-          <div className="movie-poster">
-            <img
-              src={
-                movie.poster_path
-                  ? `${img_500}/${movie.poster_path}`
-                  : unavailable
-              }
-              alt={movie.name || movie.title}
-              className="ContentModal-portrait"
+    <div className="paper">
+      <div className="contentModal">
+        <img
+          src={
+            movie.poster_path ? `${img_500}/${movie.poster_path}` : unavailable
+          }
+          alt={movie.name || movie.title}
+          className="ContentModal-portrait"
+        />
+        <img
+          src={
+            movie.backdrop_path
+              ? `${img_500}/${movie.backdrop_path}`
+              : unavailableLandscape
+          }
+          alt={movie.name || movie.title}
+          className="ContentModal-landscape"
+        />
+
+        <div className="ContentModal-about">
+          <h1 className="ContentModal-title">
+            {movie.title || movie.name}(
+            {(movie.first_air_date || movie.release_date || "-----").substring(
+              0,
+              4
+            )}
+            )
+          </h1>
+          {movie.tagline && <i className="taglines">{movie.tagline}</i>}
+          <h3>overview</h3>
+          <span className="ContentModal-description">{movie.overview}</span>
+          <p className="taglines">Movie_Status: {movie.status}</p>
+
+          <h2 className="taglines">Starring</h2>
+          <div>
+            <AliceCarousel
+              mouseTracking
+              infinite
+              disableDotsControls
+              disableButtonsControls
+              responsive={responsive}
+              items={items}
+              autoPlay
             />
-            <img
-              src={
-                movie.backdrop_path
-                  ? `${img_500}/${movie.backdrop_path}`
-                  : unavailableLandscape
-              }
-              alt={movie.name || movie.title}
-              className="ContentModal-landscape"
-            />
-          </div>
-
-          <div className="ContentModal__about">
-            <h1 className="ContentModal__title">
-              {movie.title || movie.name}(
-              {(
-                movie.first_air_date ||
-                movie.release_date ||
-                "-----"
-              ).substring(0, 4)}
-              )
-            </h1>
-            {movie.tagline && <i className="taglines">{movie.tagline}</i>}
-
-            <span className="ContentModal-description">{movie.overview}</span>
-            <p className="taglines">Movie_Status: {movie.status}</p>
-
-            <h2 className="taglines">Actors</h2>
-            <div>
-              <AliceCarousel
-                mouseTracking
-                infinite
-                disableDotsControls
-                disableButtonsControls
-                responsive={responsive}
-                items={items}
-                autoPlay
-              />
-            </div>
           </div>
         </div>
-        {trailer && (
-          <div className="trailer-container">
-            <h2>Watch Trailer</h2>
-            <iframe
-              src={`https://www.youtube.com/embed/${trailer.key}`}
-              frameBorder="0"
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-              title="video"
-              className="trailer-video"
-            />
-          </div>
-        )}
       </div>
+      {trailer && (
+        <div className="trailer-container">
+          <h2>Watch Trailer</h2>
+          <iframe
+            src={`https://www.youtube.com/embed/${trailer.key}`}
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            title="video"
+            className="trailer-video"
+          />
+        </div>
+      )}
     </div>
   );
 };

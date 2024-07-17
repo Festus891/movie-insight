@@ -24,14 +24,11 @@ const Header = () => {
     };
   }, []);
   return (
-    // <span onClick={() => window.scroll(0, 0)} className="header">
-    //   🎬 Movie Insight 🎥
-    // </span>
     <div className={`header ${show && "nav_black"}`}>
       <Link className="logo" to="/" onClick={() => window.scroll(0, 0)}>
-        <h4>Movie</h4>
+        <h2>Movie</h2>
         <img src={`${process.env.PUBLIC_URL}/insight.png`} alt="Insight" />
-        <h4>Insight</h4>
+        <h2>Insight</h2>
       </Link>
 
       <Link to="/search" className="search">
