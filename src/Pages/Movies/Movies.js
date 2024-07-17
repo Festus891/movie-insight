@@ -32,7 +32,7 @@ const Movies = () => {
   }, [genreforURL, page]);
 
   return (
-    <div>
+    <div className="grid">
       <span className="pageTitle">Discover Movies</span>
       <Genres
         type="movie"

@@ -49,6 +49,7 @@
   align-items: center;
   padding-top: 20px;
   justify-content: center;
+  padding-bottom: 2rem;
 }
 
 .ContentModal__description {
@@ -97,7 +98,7 @@
     height: 100%;
   }
   .ContentModal__title {
-    font-size: 3.5vw;
+    font-size: 3vw;
   }
   .ContentModal__description {
     font-size: 22px;

@@ -23,8 +23,8 @@ const Trending = () => {
   }, [page]);
 
   return (
-    <div>
-      <span className="pageTitle">Discover Latest </span>
+    <div className="grid">
+      <span className="pageTitle">Latest Today</span>
       <div className="trending">
         {content &&
           content.map((c) => (

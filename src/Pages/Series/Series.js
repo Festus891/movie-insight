@@ -29,7 +29,7 @@ const Series = () => {
   }, [genreforURL, page]);
 
   return (
-    <div>
+    <div className="grid">
       <span className="pageTitle">Discover Tv Show</span>
       <Genres
         type="tv"

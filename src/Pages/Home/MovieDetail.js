@@ -4,8 +4,9 @@ import axios from "../../axios";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import "./MovieDetail.css";
-import { img_300, noPicture } from "../../config/config";
 import {
+  img_300,
+  noPicture,
   img_500,
   unavailable,
   unavailableLandscape,
@@ -13,30 +14,43 @@ import {
 import Loader from "../../components/Loader/Loader";
 import NoMovies from "../../components/Loader/NoMovies";
 
-const MovieDetail = ({ isLargeRow }) => {
-  const { id } = useParams();
+const MovieDetail = () => {
+  const { id, media_type } = useParams();
   const [movie, setMovie] = useState(null);
+  const [tvShow, setTvShow] = useState(null);
   const [trailer, setTrailer] = useState(null);
   const [actors, setActors] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const base_url = "https://image.tmdb.org/t/p/original/";
   const handleDragStart = (e) => e.preventDefault();
+
   useEffect(() => {
     window.scroll(0, 0);
-    async function fetchMovieData() {
+    async function fetchData() {
       try {
-        const movieRequest = await axios.get(`/movie/${id}`);
-        console.log(movieRequest);
-        setMovie(movieRequest.data);
+        let contentRequest, trailerRequest, actorsRequest;
 
-        const trailerRequest = await axios.get(`/movie/${id}/videos`);
-        setTrailer(trailerRequest.data.results[0]);
+        if (media_type === "movie") {
+          contentRequest = await axios.get(`/movie/${id}`);
+          setMovie(contentRequest.data);
 
-        const actorsRequest = await axios.get(`/movie/${id}/credits`);
+          trailerRequest = await axios.get(`/movie/${id}/videos`);
+          setTrailer(trailerRequest.data.results[0]);
+
+          actorsRequest = await axios.get(`/movie/${id}/credits`);
+        } else if (media_type === "tv") {
+          contentRequest = await axios.get(`/tv/${id}`);
+          setTvShow(contentRequest.data);
+
+          trailerRequest = await axios.get(`/tv/${id}/videos`);
+          setTrailer(trailerRequest.data.results[0]);
+
+          actorsRequest = await axios.get(`/tv/${id}/credits`);
+        }
+
         setActors(actorsRequest.data.cast);
       } catch (error) {
-        console.error("Error fetching movie data:", error);
+        console.error("Error fetching data:", error);
       } finally {
         setTimeout(() => {
           setLoading(false);
@@ -44,8 +58,8 @@ const MovieDetail = ({ isLargeRow }) => {
       }
     }
 
-    fetchMovieData();
-  }, [id]);
+    fetchData();
+  }, [id, media_type]);
 
   const items = actors.map((actor) => (
     <div className="carouselItem">
@@ -77,43 +91,45 @@ const MovieDetail = ({ isLargeRow }) => {
     return <Loader />;
   }
 
-  if (!movie) {
+  if (!movie && !tvShow) {
     return <NoMovies />;
   }
 
+  const content = movie || tvShow;
+  const title = movie ? movie.title || movie.name : tvShow.name;
+  const date = movie
+    ? movie.first_air_date || movie.release_date
+    : tvShow.first_air_date;
+  const overview = movie ? movie.overview : tvShow.overview;
+  const posterPath = movie ? movie.poster_path : tvShow.poster_path;
+  const backdropPath = movie ? movie.backdrop_path : tvShow.backdrop_path;
+  const tagline = movie ? movie.tagline : tvShow.tagline;
+  const status = movie ? movie.status : tvShow.status;
+
   return (
     <div className="paper">
-      <div className="contentModal">
+      <div className="content-Modal">
         <img
-          src={
-            movie.poster_path ? `${img_500}/${movie.poster_path}` : unavailable
-          }
-          alt={movie.name || movie.title}
+          src={posterPath ? `${img_500}/${posterPath}` : unavailable}
+          alt={title}
           className="ContentModal-portrait"
         />
         <img
           src={
-            movie.backdrop_path
-              ? `${img_500}/${movie.backdrop_path}`
-              : unavailableLandscape
+            backdropPath ? `${img_500}/${backdropPath}` : unavailableLandscape
           }
-          alt={movie.name || movie.title}
+          alt={title}
           className="ContentModal-landscape"
         />
 
         <div className="ContentModal-about">
           <h1 className="ContentModal-title">
-            {movie.title || movie.name}(
-            {(movie.first_air_date || movie.release_date || "-----").substring(
-              0,
-              4
-            )}
-            )
+            {title} ({(date || "-----").substring(0, 4)})
           </h1>
-          {movie.tagline && <i className="taglines">{movie.tagline}</i>}
-          <h3>overview</h3>
-          <span className="ContentModal-description">{movie.overview}</span>
-          <p className="taglines">Movie_Status: {movie.status}</p>
+          {tagline && <i className="taglines">{tagline}</i>}
+          <h3>Overview</h3>
+          <span className="ContentModal-description">{overview}</span>
+          <p className="taglines">Status: {status}</p>
 
           <h2 className="taglines">Starring</h2>
           <div>

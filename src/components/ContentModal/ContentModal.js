@@ -10,8 +10,9 @@ import {
   unavailableLandscape,
 } from "../../config/config";
 import "./ContentModal.css";
-import { Button } from "@material-ui/core";
+import { Button, IconButton } from "@material-ui/core";
 import YouTubeIcon from "@material-ui/icons/YouTube";
+import CloseIcon from "@material-ui/icons/Close";
 import Carousel from "../Carousel/Carousel";
 
 const useStyles = makeStyles((theme) => ({
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   paper: {
+    position: "relative", // To position the close button absolutely within the paper
     width: "90%",
     height: "80%",
     backgroundColor: "#1f1f1f",
@@ -29,6 +31,13 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(1, 1, 3),
+    overflowY: "auto", // Enable vertical scrolling
+  },
+  closeButton: {
+    position: "absolute",
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
   },
 }));
 
@@ -52,7 +61,6 @@ export default function TransitionsModal({ children, media_type, id }) {
     );
 
     setContent(data);
-    // console.log(data);
   };
 
   const fetchVideo = async () => {
@@ -66,7 +74,6 @@ export default function TransitionsModal({ children, media_type, id }) {
   useEffect(() => {
     fetchData();
     fetchVideo();
-    // eslint-disable-next-line
   }, []);
 
   return (
@@ -94,6 +101,13 @@ export default function TransitionsModal({ children, media_type, id }) {
         <Fade in={open}>
           {content && (
             <div className={classes.paper}>
+              <IconButton
+                aria-label="close"
+                className={classes.closeButton}
+                onClick={handleClose}
+              >
+                <CloseIcon />
+              </IconButton>
               <div className="ContentModal">
                 <img
                   src={
@@ -134,18 +148,21 @@ export default function TransitionsModal({ children, media_type, id }) {
                   <div>
                     <Carousel id={id} media_type={media_type} />
                   </div>
-
-                  <Button
-                    variant="contained"
-                    startIcon={<YouTubeIcon />}
-                    color="secondary"
-                    target="__blank"
-                    href={`https://www.youtube.com/watch?v=${video}`}
-                  >
-                    Watch the Trailer
-                  </Button>
                 </div>
               </div>
+              {video && (
+                <div className="trailer-container">
+                  <h2>Watch Trailer</h2>
+                  <iframe
+                    src={`https://www.youtube.com/embed/${video}`}
+                    frameBorder="0"
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                    title="video"
+                    className="trailer-video"
+                  />
+                </div>
+              )}
             </div>
           )}
         </Fade>

@@ -23,7 +23,7 @@ function App() {
             <Route path="/movies" component={Movies} />
             <Route path="/series" component={Series} />
             <Route path="/search" component={Search} />
-            <Route path="/movie/:id" component={MovieDetail} />
+            <Route path="/:media_type/:id" component={MovieDetail} />
           </Switch>
         </div>
       </div>

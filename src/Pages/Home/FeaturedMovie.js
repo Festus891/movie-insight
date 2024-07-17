@@ -20,11 +20,21 @@ const FeaturedMovie = ({ fetchUrl, isLargeRow }) => {
     fetchData();
   }, [fetchUrl]);
 
+  const generateMovieLink = (movies) => {
+    if (movies.media_type === "movie") {
+      return `/movie/${movies.id}`;
+    } else if (movies.media_type === "tv") {
+      return `/tv/${movies.id}`;
+    } else {
+      return `/other/${movies.id}`;
+    }
+  };
+
   return (
     <div className="grid">
       <div className="grid_heading">
         <h1>Featured Movie</h1>
-        <Link to="/trending">See more</Link>
+        <Link to="/latest">See more</Link>
       </div>
 
       <div className="featured_movie">
@@ -34,7 +44,7 @@ const FeaturedMovie = ({ fetchUrl, isLargeRow }) => {
               badgeContent={movies.vote_average}
               color={movies.vote_average > 6 ? "primary" : "secondary"}
             />
-            <Link to={`/movie/${movies.id}`} className="img_link">
+            <Link to={generateMovieLink(movies)} className="img_link">
               <img
                 className="images"
                 src={
